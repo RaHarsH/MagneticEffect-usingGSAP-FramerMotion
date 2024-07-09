@@ -6,19 +6,21 @@ import React, { useEffect, useRef } from 'react'
 const GsapMagnetic = ({children}) => {
     const ref = useRef(null);
     useEffect(() => {
+        const xTo = gsap.quickTo(ref.current, 'x', {duration: 1, ease: 'elastic.out(1, 0.3)'})
+        const yTo = gsap.quickTo(ref.current, 'y', {duration: 1, ease: 'elastic.out(1, 0.3)'})
         const mouseMove = (e) => {
             const {clientX, clientY} = e;
-            const {height, width, top, left} = ref.current.getBoundingClientRect();
+            const {height, width, left, top} = ref.current.getBoundingClientRect();
             const x = clientX - (left + width/2);
             const y = clientY - (top + height/2);
 
-            gsap.to(ref.current, {x: x})
-            gsap.to(ref.current, {y: y})
+            xTo(x);
+            yTo(y);
         }
 
         const mouseLeave = (e) => {
-            gsap.to(ref.current, {x: 0})
-            gsap.to(ref.current, {y: 0})
+            xTo(0);
+            yTo(0);
         }
 
         ref.current.addEventListener('mousemove', mouseMove);
@@ -28,7 +30,7 @@ const GsapMagnetic = ({children}) => {
             ref.current.addEventListener('mousemove', mouseMove);
             ref.current.addEventListener('mouseleave', mouseLeave);
         }
-    }, [ ])
+    }, [])
   return (
     React.cloneElement(children, {ref})
   )
