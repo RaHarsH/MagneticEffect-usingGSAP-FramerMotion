@@ -1,13 +1,13 @@
-'use client'
-import gsap from 'gsap'
-import React, { useEffect, useRef } from 'react'
+'use client';
+import gsap from 'gsap';
+import React, { useEffect, useRef } from 'react';
 
 
 const GsapMagnetic = ({children}) => {
     const ref = useRef(null);
     useEffect(() => {
-        const xTo = gsap.quickTo(ref.current, 'x', {duration: 1, ease: 'elastic.out(1, 0.3)'})
-        const yTo = gsap.quickTo(ref.current, 'y', {duration: 1, ease: 'elastic.out(1, 0.3)'})
+        const xTo = gsap.quickTo(ref.current, 'x', {duration: 1, ease: 'elastic.out(1, 0.3)'});
+        const yTo = gsap.quickTo(ref.current, 'y', {duration: 1, ease: 'elastic.out(1, 0.3)'});
         const mouseMove = (e) => {
             const {clientX, clientY} = e;
             const {height, width, left, top} = ref.current.getBoundingClientRect();
@@ -32,7 +32,7 @@ const GsapMagnetic = ({children}) => {
         }
     }, [])
   return (
-    React.cloneElement(children, {ref})
+    React.cloneElement(children, {ref});
   )
 }
 
